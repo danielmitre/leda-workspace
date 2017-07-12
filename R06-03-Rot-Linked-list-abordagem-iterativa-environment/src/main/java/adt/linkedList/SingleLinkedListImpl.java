@@ -75,7 +75,6 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 			it = it.getNext();
 			
 		}
-		System.out.println(Arrays.toString(arr));
 		return arr;
 	}
 
