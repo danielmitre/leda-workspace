@@ -104,9 +104,7 @@ public class StudentBSTTest {
 		assertEquals(size, tree.size());
 
 		while (!tree.isEmpty()) {
-			System.out.println(tree.getRoot());
 			tree.remove(tree.getRoot().getData());
-			System.out.println(Arrays.toString(tree.order()));
 			assertEquals(--size, tree.size());
 		}
 	}
@@ -130,7 +128,6 @@ public class StudentBSTTest {
 	@Test
 	public void testRemove() {
 		fillTree(); // -40 -34 0 2 5 6 9 12 23 67 76 232
-
 		Integer[] order = { -40, -34, 0, 2, 5, 6, 9, 12, 23, 67, 76, 232 };
 
 		assertArrayEquals(order, tree.order());
