@@ -1,16 +1,13 @@
 package adt.linkedList;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	protected T data;
 	protected RecursiveSingleLinkedListImpl<T> next;
 
 	public RecursiveSingleLinkedListImpl() {
-
+		data = null;
+		next = null;
 	}
 
 	public RecursiveSingleLinkedListImpl(T data,
@@ -21,20 +18,29 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public boolean isEmpty() {
-		return next == null;
+		return data == null;
 	}
 
 	@Override
 	public int size() {
-		if (next == null){
+		if (data == null){
 			return 0;
 		}
+		
+		if (next == null){
+			return 1;
+		}
+		
 		return next.size()+1;
 	}
 
 	@Override
 	public T search(T element) {
-		if (element.equals(data)){
+		if (element == null){
+			if (element == data) {
+				return element;
+			}
+		} else if (element.equals(data)){
 			return element;
 		}
 		
@@ -47,11 +53,16 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public void insert(T element) {
-		if (next == null){
-			next = new RecursiveSingleLinkedListImpl<T>(element, null);
+		if (data == null){
+			data = element;
 		} else {
-			next.insert(element);
+			if (next == null){
+				next = new RecursiveSingleLinkedListImpl<T>(element, null);
+			} else {
+				next.insert(element);
+			}
 		}
+		
 	}
 
 	@Override
@@ -66,16 +77,18 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 	@Override
 	public T[] toArray() {
 		T[] array = (T[]) new Object[size()];
-		RecursiveSingleLinkedListImpl<T> it = this;
-		for (int i=0; i<size(); i++){
-			array[i] = it.data;
+		toArray(array, 0, size());
+		return array;
+	}
+	
+	protected void toArray(T[] arr, int idx, int tam){
+		if (idx < tam){
+			arr[idx] = data;
 			
-			if (it.next != null) {
-				it = it.next;
+			if (next != null){
+				next.toArray(arr, idx+1, tam);
 			}
 		}
-		System.out.println(Arrays.toString(array));
-		return array;
 	}
 
 	public T getData() {

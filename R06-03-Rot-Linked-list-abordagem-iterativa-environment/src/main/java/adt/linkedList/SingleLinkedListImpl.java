@@ -1,7 +1,5 @@
 package adt.linkedList;
 
-import java.util.Arrays;
-
 public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	protected SingleLinkedListNode<T> head;
